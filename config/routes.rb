@@ -1,16 +1,9 @@
 Movies::Application.routes.draw do
 
+
+ resources :movies #resources is a method that creates paths authomatically
+
   root 'movies#index'
-
-  get 'movies'  => 'movies#index', as: :movies
-  post 'movies' => 'movies#create'
-  get 'movies/new' => 'movies#new', as: :new_movie
-  get 'movies/:id/edit' => 'movies#edit', as: :edit_movie
-  get 'movies/:id' => 'movies#show', as: :movie
-  patch 'movies/:id' => 'movies#update'
-  delete 'movies/:id' => 'movies#destroy'
-
-
 
 
 #      root GET    /                          movies#index
@@ -22,8 +15,8 @@ Movies::Application.routes.draw do
 #            PATCH  /movies/:id(.:format)      movies#update
 #            PUT    /movies/:id(.:format)      movies#update
 #            DELETE /movies/:id(.:format)      movies#destroy
-
-  # resources :movies
+  
+ post 'movies/search' => 'movies#search'
 
 
 end

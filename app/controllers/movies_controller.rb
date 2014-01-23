@@ -11,7 +11,7 @@ class MoviesController < ApplicationController
 
     respond_to do |format|
       format.html
-      format.json { render :json => @@movie_db }
+      format.json { render :json => @@movie_db }  #puts your database in json format for api requests
       format.xml { render :xml => @@movie_db.to_xml }
     end
   end
@@ -48,6 +48,7 @@ class MoviesController < ApplicationController
     movie = params.require(:movie).permit(:title, :year)
     movie["imdbID"] = rand(10000..100000000).to_s
     # add object to movie db
+    
     @@movie_db << movie
     # show movie page
     # render :index
@@ -77,4 +78,11 @@ class MoviesController < ApplicationController
     redirect_to action: :index
   end
 
+
+ def search
+    movie_id = params[:title]["imdbID"]
+    @movie = @@movie_db.find do |m|
+    m["imdbID"] == movie_id
+  end
+end
 end
